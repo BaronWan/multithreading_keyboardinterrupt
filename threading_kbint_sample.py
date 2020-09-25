@@ -6,9 +6,6 @@ from threading import Thread
 from time import sleep
 import sys, os
 
-q1 = Queue()    # th1 專用
-q2 = Queue()    # th2 專用
-
 def world(outq):
     while True:
         if outq.qsize() > 0:
@@ -29,8 +26,9 @@ def hello(outq):
         print('hello checking...')
         sleep(1)
 
-
 if __name__ == '__main__':
+    q1 = Queue()    # th1 專用
+    q2 = Queue()    # th2 專用
     th1 = Thread(target=hello, args=(q1,))
     th2 = Thread(target=world, args=(q2,))
     th1.start()
@@ -47,5 +45,4 @@ if __name__ == '__main__':
             th1.join()
             th2.join()
     sys.exit('main thead has be exit')
-
 
