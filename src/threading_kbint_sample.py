@@ -1,39 +1,10 @@
 #!/usr/bin/env python3
-# Wan Pei Chih <davidwan58@gmail.com>
+# @author: Bruce Wan
 
 from queue import Queue
 import threading
 from time import sleep
 import sys
-
-# args = [(func1,(param1,)),(func2,(param1,)),...]
-class MyThreading:
-    def __init__(self, **args):
-        self.DELAY = 1
-        self.targets = [x[0] for x in args]
-        self.args = [x[1] for x in args]
-        self.run()
-    
-    def run(self):
-        self.evt = threading.Event()
-        self.qs = [Queue()]*len(self.targets)
-        self.ths = []
-        for n in range(len(self.targets)):
-            Th = threading.Thread(
-                    target=self.targets[n],
-                    args=self.args[n])
-            Th.start()
-            self.ths.append(Th)
-        try:
-            while not self.evt.wait(timeout=self.DELAY):
-                print('Main thread processing...')
-        except KeyboardInterrupt:
-            self.evt.set()
-            for n in range(len(self.ths)):
-                self.qs[n].put('QUIT')
-                self.ths[n].join()
-        
-
 
 def world(outq):
       while True:

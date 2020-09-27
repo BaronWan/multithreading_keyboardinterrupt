@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# Wan Pei Chih <davidwan58@gmail.com>
+# @author: Bruce Wan
 # 假設情境一：
 #    程式中正在運用 Queue 進行線程間的資訊傳遞，這時我們可以利用此一溝通管道進行,
 #  當使用者觸發一 keyboard interrupt 的事件時, 主線程經由 Queue 通知所有子線程準備結束。
