@@ -14,6 +14,7 @@ def world(outq):
               if data == 'QUIT':
                   sys.exit('world will be exit...')
           print('world checking...')
+          sleep(0.000001)
   
 def hello(outq):
       while True:
@@ -23,6 +24,7 @@ def hello(outq):
               if data == 'QUIT':
                   sys.exit('hello will be exit...')
           print('hello checking...')
+          sleep(0.000001)
 
 
 if __name__ == '__main__':
@@ -34,7 +36,7 @@ if __name__ == '__main__':
      th2.start()
      while True:
          try:
-             sleep(1)
+             sleep(0.0000000001)
              if not th1.is_alive() and not th2.is_alive():
                  print('Child threading all exited.')
                  break
