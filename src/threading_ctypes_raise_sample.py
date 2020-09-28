@@ -18,7 +18,7 @@ class MyThreading:
         self.run()
 
     def run(self):
-        # record threads
+        # save an running threads
         self.ths = []
         # The threading Event() must be written before Thread()
         evt = threading.Event()
@@ -58,8 +58,10 @@ class MyThreading:
     
     # reference from https://gist.github.com/liuw/2407154
     def ctype_async_raise(self, exception):
+        # initial variables
         found = False
         targetID = 0
+        # Check the activity status of all processing threads
         for Th in self.ths:
             for tid,tobj in threading._active.items():
                 # Have matches ?
@@ -74,7 +76,6 @@ class MyThreading:
             ret = ctypes.pythonapi.PyThreadState_SetAsyncExc(
                     ctypes.c_long(targetID),
                     ctypes.py_object(exception))
-            # 不合法的線程ID
             if ret == 0:
                 raise ValueError("Invalid thread ID")
             # 遠程 api 進行子線程例外執行失敗
