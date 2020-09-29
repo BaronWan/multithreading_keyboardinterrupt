@@ -32,7 +32,7 @@ stages:
 pylint:
     stage: Static Analysis
     script:
-        - pylint3 --generate-rcfile > .pylintrc
+        - pylint --generate-rcfile > .pylintrc
         - pylint --rcfile=.pylintrc --confidence=INFERENCE_FAILURE src/
 
 pytest:
