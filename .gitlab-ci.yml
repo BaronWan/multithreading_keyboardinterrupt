@@ -23,20 +23,20 @@ before_script:
   - pip install virtualenv
   - virtualenv venv
   - source venv/bin/activate
-  - pip install --upgrade pip setuptools wheel pytest pylint
+  - pip install --upgrade pip setuptools wheel pytest pylint nuitka-setuptools Nuitka
 
 stages:
     - Static Analysis
     - Test
-    - Deploy
 
-# pylint:
-#     stage: Static Analysis
-#     script:
-#         - pylint -d C0301 src/*.py
+pylint:
+    stage: Static Analysis
+    script:
+        - pylint3 --generate-rcfile > .pylintrc
+        - pylint --rcfile=.pylintrc --confidence=INFERENCE_FAILURE src/
 
 pytest:
     stage: Test
     script:
-        - cd test/;pytest -v
-
+        - cd test/
+        - pytest -v
